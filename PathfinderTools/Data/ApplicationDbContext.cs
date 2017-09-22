@@ -10,9 +10,14 @@ namespace PathfinderTools.Data
 {
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
+
+        public DbSet<Room> Rooms { get; set; }
+        public DbSet<RoomConnector> RoomConnector { get; set; }
+
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
+
         }
 
         protected override void OnModelCreating(ModelBuilder builder)
@@ -25,11 +30,11 @@ namespace PathfinderTools.Data
             {
                 b
                 .HasOne(h => h.FromRoom)
-                .WithMany(m => m.FromRooms)
+                .WithMany(m => m.GoesToo)
                 .OnDelete(DeleteBehavior.Restrict);
                 b
                 .HasOne(h => h.ToRoom)
-                .WithMany(m => m.ToRooms)
+                .WithMany(m => m.ComesFrom)
                 .OnDelete(DeleteBehavior.Restrict);
 
             });

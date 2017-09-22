@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace PathfinderTools.Models
@@ -13,11 +14,14 @@ namespace PathfinderTools.Models
 
 
         // Navigations
+        [DisplayName("PreviousRooms")]
         [InverseProperty(nameof(RoomConnector.ToRoom))]
-        public ICollection<RoomConnector> ToRooms { get; set; }
+        public ICollection<RoomConnector> ComesFrom { get; set; } = new HashSet<RoomConnector>();
 
+
+        [DisplayName("NextRooms")]
         [InverseProperty(nameof(RoomConnector.FromRoom))]
-        public ICollection<RoomConnector> FromRooms { get; set; }
+        public ICollection<RoomConnector> GoesToo { get; set; } = new HashSet<RoomConnector>();
 
         [NotMapped]
         public ICollection<RoomConnector> AllRooms
@@ -25,8 +29,8 @@ namespace PathfinderTools.Models
             get
             {
                 var rv = new List<RoomConnector>();
-                rv.AddRange(this.ToRooms);
-                rv.AddRange(this.FromRooms);
+                rv.AddRange(this.ComesFrom);
+                rv.AddRange(this.GoesToo);
                 return rv;
             }
         }
