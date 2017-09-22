@@ -21,6 +21,20 @@ namespace PathfinderTools.Data
             // Customize the ASP.NET Identity model and override the defaults if needed.
             // For example, you can rename the ASP.NET Identity table names and more.
             // Add your customizations after calling base.OnModelCreating(builder);
+            builder.Entity<RoomConnector>(b =>
+            {
+                b
+                .HasOne(h => h.FromRoom)
+                .WithMany(m => m.FromRooms)
+                .OnDelete(DeleteBehavior.Restrict);
+                b
+                .HasOne(h => h.ToRoom)
+                .WithMany(m => m.ToRooms)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            });
+
+
         }
     }
 }

@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.26730.16
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PathfinderTools", "PathfinderTools\PathfinderTools.csproj", "{50B4A1F9-F74F-4287-993A-8D595D2CB5E1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PathfinderTools.Models", "PathfinderTools.Models\PathfinderTools.Models.csproj", "{C6EB8167-DC05-4E92-9ECF-EC9F927CD711}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{50B4A1F9-F74F-4287-993A-8D595D2CB5E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{50B4A1F9-F74F-4287-993A-8D595D2CB5E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{50B4A1F9-F74F-4287-993A-8D595D2CB5E1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C6EB8167-DC05-4E92-9ECF-EC9F927CD711}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C6EB8167-DC05-4E92-9ECF-EC9F927CD711}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C6EB8167-DC05-4E92-9ECF-EC9F927CD711}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C6EB8167-DC05-4E92-9ECF-EC9F927CD711}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
