@@ -11672,12 +11672,11 @@ var App = function (_React$Component) {
         key: 'render',
         value: function render() {
             return _react2.default.createElement(_dungeons2.default, null);
-        } // end of render
-
+        }
     }]);
 
     return App;
-}(_react2.default.Component); //end of class
+}(_react2.default.Component);
 
 (0, _reactDom.render)(_react2.default.createElement(
     _reactRouterDom.BrowserRouter,

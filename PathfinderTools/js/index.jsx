@@ -10,14 +10,11 @@ class App extends React.Component {
         this.state = {
         };
     };
-    
-   
-
+  
     render() {
        return <Dungeons/>
-    } // end of render
-} //end of class
-
+    } 
+} 
 render(<BrowserRouter>
     <App />
 </BrowserRouter>, document.getElementById('app'));
