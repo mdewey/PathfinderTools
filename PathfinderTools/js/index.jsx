@@ -13,9 +13,7 @@ class App extends React.Component {
     //handleClick() {
     //}
 
-
-
-    componentDidMount() {
+componentDidMount() {
         // onload
         fetch("/api/dungeons")
             .then((response) => {
