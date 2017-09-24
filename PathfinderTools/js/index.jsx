@@ -1,5 +1,6 @@
 ﻿import React from 'react';
 import { render } from 'react-dom';
+import { BrowserRouter } from 'react-router-dom'
 
 class App extends React.Component {
 
@@ -60,4 +61,6 @@ class App extends React.Component {
     } // end of render
 } //end of class
 
-render(<App />, document.getElementById('app'));
+render(<BrowserRouter>
+    <App />
+</BrowserRouter>, document.getElementById('app'));
