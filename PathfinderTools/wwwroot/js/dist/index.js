@@ -100,45 +100,86 @@ var App = function (_React$Component) {
     }
 
     _createClass(App, [{
-        key: 'handleClick',
-        value: function handleClick() {}
-    }, {
-        key: 'updateScores',
-        value: function updateScores() {
+        key: 'componentDidMount',
+
+
+        //handleClick() {
+        //}
+
+
+        value: function componentDidMount() {
             var _this2 = this;
 
-            fetch("/api/highscores").then(function (response) {
+            // onload
+            fetch("/api/dungeons").then(function (response) {
                 console.log("repsonse", response);
                 return response.json();
             }).then(function (json) {
-                console.log("json", json.scores);
+                console.log("json", json);
 
                 _this2.setState(function (prevState, props) {
                     return {
-                        timeUpdated: json.timeUpdated,
-                        scores: json.scores
+                        dungeons: json
                     };
                 });
             });
         }
     }, {
-        key: 'componentDidMount',
-        value: function componentDidMount() {
-            // onload
-        }
-    }, {
         key: 'render',
         value: function render() {
-            return _react2.default.createElement(
-                'div',
-                null,
-                'hello world'
-            );
-        }
+            if (!this.state.dungeons) {
+                return _react2.default.createElement(
+                    'div',
+                    null,
+                    'loading dungeons....'
+                );
+            } else if (this.state.dungeons.length === 0) {
+                return _react2.default.createElement(
+                    'div',
+                    null,
+                    ' No Dungeons yet, go and add one to get started'
+                );
+            } else {
+                return _react2.default.createElement(
+                    'div',
+                    { className: 'row' },
+                    this.state.dungeons.map(function (dun, i) {
+                        return _react2.default.createElement(
+                            'div',
+                            { className: 'col-sm-6 col-md-4', key: i },
+                            _react2.default.createElement(
+                                'div',
+                                { className: 'thumbnail' },
+                                _react2.default.createElement('img', { src: 'http://fillmurray.com/242/200', alt: '...' }),
+                                _react2.default.createElement(
+                                    'div',
+                                    { className: 'caption' },
+                                    _react2.default.createElement(
+                                        'h3',
+                                        null,
+                                        dun.name
+                                    ),
+                                    _react2.default.createElement(
+                                        'p',
+                                        null,
+                                        _react2.default.createElement(
+                                            'a',
+                                            { href: '#', className: 'btn btn-primary', role: 'button' },
+                                            'Start'
+                                        )
+                                    )
+                                )
+                            )
+                        );
+                    })
+                );
+            }
+        } // end of render
+
     }]);
 
     return App;
-}(_react2.default.Component);
+}(_react2.default.Component); //end of class
 
 (0, _reactDom.render)(_react2.default.createElement(App, null), document.getElementById('app'));
 
