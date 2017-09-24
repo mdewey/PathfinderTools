@@ -26,6 +26,8 @@ namespace PathfinderTools.Data
             System.Console.WriteLine("Seeding data....");
             if (!context.Rooms.Any())
             {
+                System.Console.WriteLine("Actually Seeding data....");
+
                 var aRoom = new Room
                 {
                     Name = "Main Room A"
@@ -52,9 +54,21 @@ namespace PathfinderTools.Data
                     ToRoom = bRoom
                 };
 
+                
                 context.RoomConnector.Add(ab);
 
                 context.SaveChanges();
+
+                var firstDun = new Dungeon
+                {
+                    Name = "First!!!",
+                    StartingRoom = aRoom
+                };
+
+                context.Dungeons.Add(firstDun);
+
+                context.SaveChanges();
+
             }
         }
     }

@@ -13,6 +13,7 @@ namespace PathfinderTools.Data
 
         public DbSet<Room> Rooms { get; set; }
         public DbSet<RoomConnector> RoomConnector { get; set; }
+        public DbSet<Dungeon> Dungeons { get; set; }
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
