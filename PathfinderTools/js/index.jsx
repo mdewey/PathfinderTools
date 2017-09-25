@@ -10,37 +10,11 @@ class App extends React.Component {
         this.state = {
         };
     };
-<<<<<<< HEAD
 
-    //handleClick() {
-    //}
-
-    componentDidMount() {
-        // onload
-        fetch("/api/dungeons")
-            .then((response) => {
-                console.log("repsonse", response)
-                return response.json()
-            })
-            .then((json) => {
-                console.log("json", json)
-
-                this.setState((prevState, props) => {
-                    return {
-                        dungeons: json,
-                    }
-                });
-            });
-    };
-
-
-=======
-  
->>>>>>> routingWithReact
     render() {
-       return <Dungeons/>
-    } 
-} 
+        return <Dungeons />
+    }
+}
 render(<BrowserRouter>
     <App />
 </BrowserRouter>, document.getElementById('app'));
