@@ -26,7 +26,7 @@ namespace PathfinderTools.Controllers
         public IEnumerable<Dungeon> GetDungeons()
         {
             return new List<Dungeon> {
-                new Dungeon 
+                new Dungeon
                 {
                     Id = 1,
                     Name = "Hello",
@@ -39,6 +39,12 @@ namespace PathfinderTools.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetDungeon([FromRoute] int id)
         {
+            return Ok(new Dungeon
+            {
+                Id = 1,
+                Name = "Hello",
+            });
+
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
