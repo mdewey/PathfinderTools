@@ -30,6 +30,7 @@ namespace PathfinderTools.Controllers
                 {
                     Id = 1,
                     Name = "Hello",
+                    StartingRoomId = 1
                 }
             };
             // return _context.Dungeons;
@@ -43,6 +44,7 @@ namespace PathfinderTools.Controllers
             {
                 Id = 1,
                 Name = "Hello",
+                StartingRoomId = 1
             });
 
             if (!ModelState.IsValid)
