@@ -186,9 +186,7 @@ namespace PathfinderTools.Migrations
 
                     b.Property<string>("Name");
 
-                    b.Property<int>("StaringRoomId");
-
-                    b.Property<int?>("StartingRoomId");
+                    b.Property<int>("StartingRoomId");
 
                     b.HasKey("Id");
 
@@ -278,7 +276,8 @@ namespace PathfinderTools.Migrations
                 {
                     b.HasOne("PathfinderTools.Models.Room", "StartingRoom")
                         .WithMany()
-                        .HasForeignKey("StartingRoomId");
+                        .HasForeignKey("StartingRoomId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("PathfinderTools.Models.RoomConnector", b =>

@@ -25,28 +25,13 @@ namespace PathfinderTools.Controllers
         [HttpGet]
         public IEnumerable<Dungeon> GetDungeons()
         {
-            return new List<Dungeon> {
-                new Dungeon
-                {
-                    Id = 1,
-                    Name = "Hello",
-                    StartingRoomId = 1
-                }
-            };
-            // return _context.Dungeons;
+             return _context.Dungeons;
         }
 
         // GET: api/Dungeons/5
         [HttpGet("{id}")]
         public async Task<IActionResult> GetDungeon([FromRoute] int id)
         {
-            return Ok(new Dungeon
-            {
-                Id = 1,
-                Name = "Hello",
-                StartingRoomId = 1
-            });
-
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);

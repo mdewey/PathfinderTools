@@ -1,4 +1,5 @@
 ﻿import React from 'react';
+import Room from './room'
 
 class SelectedDungeon extends React.Component {
 
@@ -9,7 +10,8 @@ class SelectedDungeon extends React.Component {
         let _data = full || { id };
         this.state = {
             selectedDungeon: _data,
-            needToLoadDungeon: !full
+            needToLoadDungeon: !full,
+            firstRoom: {}
         };
 
         //   this.handleClick = this.handleClick.bind(this);
@@ -47,10 +49,11 @@ class SelectedDungeon extends React.Component {
                     return response.json()
                 })
                 .then((json) => {
-                    console.log("json", json)
+                    console.log("json 1", json)
                     this.setState((prevState, props) => {
+                        console.log("updating statue")
                         return {
-                            currentRoom: json,
+                            firstRoom: json,
                         }
                     });
                 });
@@ -75,7 +78,10 @@ class SelectedDungeon extends React.Component {
             return <div> loading dungeon....</div>
         }
         else {
-            return <div> Lets go through the dungeon: {this.state.selectedDungeon.name}</div>
+            return <section>
+                <header>Lets go through the dungeon: {this.state.selectedDungeon.name}</header>
+                <Room selectedRoom={this.state.firstRoom} />
+            </section>
         }
     } // end of render
 } //end of class

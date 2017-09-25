@@ -33,3 +33,24 @@
         display: none;
     }
 }
+
+
+/* Custom CSS starts here*/
+
+.flex {
+    display: flex;
+}
+
+
+.flex-container-row {
+    flex-direction: row;
+}
+
+.flex-container-column {
+}
+
+.left {
+}
+
+.right {
+}
