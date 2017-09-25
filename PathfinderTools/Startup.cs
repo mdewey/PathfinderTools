@@ -41,7 +41,7 @@ namespace PathfinderTools
                 .AddJsonOptions(
                     options => options.SerializerSettings.ReferenceLoopHandling =
                     Newtonsoft.Json.ReferenceLoopHandling.Ignore
-                ); 
+                );
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -67,11 +67,15 @@ namespace PathfinderTools
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
+
+                routes.MapSpaFallbackRoute(
+                    name: "spa-fallback",
+                    defaults: new { controller = "Home", action = "Index" });
             });
 
             using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
             {
-                serviceScope.ServiceProvider.GetService<ApplicationDbContext>().EnsureSeeded();
+                //serviceScope.ServiceProvider.GetService<ApplicationDbContext>().EnsureSeeded();
 
             }
         }

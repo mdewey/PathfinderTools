@@ -25,7 +25,14 @@ namespace PathfinderTools.Controllers
         [HttpGet]
         public IEnumerable<Dungeon> GetDungeons()
         {
-            return _context.Dungeons;
+            return new List<Dungeon> {
+                new Dungeon 
+                {
+                    Id = 1,
+                    Name = "Hello",
+                }
+            };
+            // return _context.Dungeons;
         }
 
         // GET: api/Dungeons/5

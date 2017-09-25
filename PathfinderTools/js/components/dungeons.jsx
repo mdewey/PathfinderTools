@@ -1,4 +1,7 @@
 ﻿import React from 'react';
+import { Link } from 'react-router-dom'
+
+
 
 class Dungeons extends React.Component {
 
@@ -49,7 +52,9 @@ class Dungeons extends React.Component {
                             <img src="http://fillmurray.com/242/200" alt="..." />
                             <div className="caption">
                                 <h3>{dun.name}</h3>
-                                <p><a href="#" className="btn btn-primary" role="button">Start</a></p>
+                                <p>
+                                    <Link to={{pathname:`/dungeon/${dun.id}`, state: { selectedDungeon:dun }}} className="btn btn-primary">Start</Link>
+                                </p>
                             </div>
                         </div>
                     </div>
