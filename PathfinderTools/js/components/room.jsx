@@ -65,11 +65,26 @@ class SelectedRoom extends React.Component {
             return "ABOVE";
         }
     }
-
-
+    
     render() {
         if (this.state.currentRoom) {
             return <section className="room-container">
+                <section className="right">
+                    <h3>"Prev" Rooms</h3>
+                    <ul>
+                        {this.state.currentRoom.comesFrom.map((room, i) => {
+                            const name = room.fromRoom.name;
+                            const id = room.fromRoom.id;
+                            return <li key={i}>
+                                <button className="btn btn-primary" onClick={evt => this.loadNextRoom(evt, id)}>
+                                    {name}
+                                </button>&nbsp;
+                                <span className="label label-success">{this.reverseDirection(room.direction)}</span>
+
+                            </li>
+                        })}
+                    </ul>
+                </section>
                 <section className="left">
                     <header>currently in {this.state.currentRoom.name}</header>
                     <section>
@@ -93,22 +108,7 @@ class SelectedRoom extends React.Component {
                     </ul>
                 </section>
 
-                <section className="right">
-                    <h3>"Prev" Rooms</h3>
-                    <ul>
-                        {this.state.currentRoom.comesFrom.map((room, i) => {
-                            const name =  room.fromRoom.name;
-                            const id = room.fromRoom.id;
-                            return <li key={i}>
-                                <button className="btn btn-primary" onClick={evt => this.loadNextRoom(evt, id)}>
-                                    {name}
-                                </button>&nbsp;
-                                <span className="label label-success">{this.reverseDirection(room.direction)}</span>
-
-                            </li>
-                        })}
-                    </ul>
-                </section>
+               
             </section>
         }
         else {
