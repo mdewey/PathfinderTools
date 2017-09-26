@@ -51,11 +51,19 @@ namespace PathfinderTools.Data
                 var ab = new RoomConnector
                 {
                     FromRoom = aRoom,
-                    ToRoom = bRoom
+                    ToRoom = bRoom,
+                    Direction = Direction.NORTH
                 };
 
+                var bc = new RoomConnector
+                {
+                    FromRoom = bRoom,
+                    ToRoom = cRoom,
+                    Direction = Direction.SOUTH
+                };
                 
                 context.RoomConnector.Add(ab);
+                context.RoomConnector.Add(bc);
 
                 context.SaveChanges();
 

@@ -62,7 +62,9 @@ class SelectedRoom extends React.Component {
                             return <li key={i}>
                                 <button className="btn btn-primary" onClick={evt => this.loadNextRoom(evt, id)}>
                                     {name}
-                                </button>
+                                </button>&nbsp;
+                                <span className="label label-success">{room.direction}</span>
+
                             </li>
                         })}
                     </ul>

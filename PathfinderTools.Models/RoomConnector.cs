@@ -9,7 +9,8 @@ namespace PathfinderTools.Models
     {
         public int Id { get; set; }
 
-
+        public Direction Direction { get; set; }
+        
         // Navigation
         public int FromRoomId { get; set; }
         public Room FromRoom { get; set; }
