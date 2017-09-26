@@ -95,15 +95,21 @@ class SelectedRoom extends React.Component {
                     <h3>"Next" Rooms</h3>
                     <ul>
                         {this.state.currentRoom.goesToo.map((room, i) => {
-                            const name = room.toRoom.name;
-                            const id = room.toRoom.id;
-                            return <li key={i}>
-                                <button className="btn btn-primary" onClick={evt => this.loadNextRoom(evt, id)}>
-                                    {name}
-                                </button>&nbsp;
+                            if (room.toRoom) {
+
+                                const name = room.toRoom.name;
+                                const id = room.toRoom.id;
+                                return <li key={i}>
+                                    <button className="btn btn-primary" onClick={evt => this.loadNextRoom(evt, id)}>
+                                        {name}
+                                    </button>&nbsp;
                                 <span className="label label-success">{room.direction}</span>
 
-                            </li>
+                                </li>
+                            } else {
+                                console.log(room)
+                                return <li key={i}>nope</li>
+                            }
                         })}
                     </ul>
                 </section>

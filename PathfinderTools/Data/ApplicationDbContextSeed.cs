@@ -75,6 +75,7 @@ namespace PathfinderTools.Data
                 var bToTreasure = new RoomConnector
                 {
                     FromRoom = bRoom,
+                    ToRoom = hidden,
                     Direction = Direction.ABOVE,
                     IsHidden = true,
                     DcToFind = 15
