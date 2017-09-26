@@ -7,19 +7,23 @@ class SelectedDungeon extends React.Component {
         super(props);
         const id = parseInt(props.match.params.id, 10)
         const roomId = parseInt(props.match.params.roomId, 10);
-        const full = props.location.state.selectedDungeon;
+        console.log(['ctor', 'selectedDungoen', this.state, props])
+
+        const full = props.location.state ? props.location.state.selectedDungeon : undefined;
         let _data = full || { id };
         this.state = {
             selectedDungeon: _data,
             needToLoadDungeon: !full,
             currentRoom: { id: roomId }
         };
-        console.log(['ctor', 'selectedDungoen', this.state ])
     };
 
- 
+
     componentDidMount() {
         console.log(['selectedDungoen', 'mount', this.state])
+        if (this.state.needToLoadDungeon) {
+            this.loadDungeon()
+        }
     };
 
     loadNextRoom(roomId) {
@@ -42,7 +46,20 @@ class SelectedDungeon extends React.Component {
             console.log("no id to load")
         }
     }
-
+    loadDungeon() {
+        console.log(['selectedDungoen', 'loading  dungeon', this.state])
+        fetch('/api/dungeons/' + this.state.selectedDungeon.id)
+            .then(resp => resp.json())
+            .then(json => {
+                console.log(['selectedDungoen', 'fetched  dungeon', json])
+                this.setState(() => {
+                    return {
+                        selectedDungeon: json,
+                        needToLoadDungeon: false
+                    };
+                });
+            });
+    }
     componentWillReceiveProps(nextProps) {
         console.log(['selectedDungoen', 'props', nextProps, this.props, this.state])
         this.loadNextRoom(nextProps.match.params.roomId)
