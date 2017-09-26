@@ -44,6 +44,29 @@ class SelectedRoom extends React.Component {
     };
 
 
+    reverseDirection(direction) {
+        if (direction === 'NORTH')
+        {
+            return "SOUTH";
+        }
+        if (direction === 'SOUTH') {
+            return "NORTH";
+        }
+        if (direction === 'EAST') {
+            return "WEST";
+        }
+        if (direction === 'WEST') {
+            return "EAST";
+        }
+        if (direction === 'ABOVE') {
+            return "BELOW";
+        }
+        if (direction === 'BELOW') {
+            return "ABOVE";
+        }
+    }
+
+
     render() {
         if (this.state.currentRoom) {
             return <section className="room-container">
@@ -54,16 +77,33 @@ class SelectedRoom extends React.Component {
                     </section>
                 </section>
                 <section className="right">
-                    <h3>Connected Rooms</h3>
+                    <h3>"Next" Rooms</h3>
                     <ul>
-                        {this.state.currentRoom.allRooms.map((room, i) => {
-                            const name = room.toRoom ? room.toRoom.name : room.fromRoom.name;
-                            const id = room.toRoom ? room.toRoom.id : room.fromRoom.id;
+                        {this.state.currentRoom.goesToo.map((room, i) => {
+                            const name = room.toRoom.name;
+                            const id = room.toRoom.id;
                             return <li key={i}>
                                 <button className="btn btn-primary" onClick={evt => this.loadNextRoom(evt, id)}>
                                     {name}
                                 </button>&nbsp;
                                 <span className="label label-success">{room.direction}</span>
+
+                            </li>
+                        })}
+                    </ul>
+                </section>
+
+                <section className="right">
+                    <h3>"Prev" Rooms</h3>
+                    <ul>
+                        {this.state.currentRoom.comesFrom.map((room, i) => {
+                            const name =  room.fromRoom.name;
+                            const id = room.fromRoom.id;
+                            return <li key={i}>
+                                <button className="btn btn-primary" onClick={evt => this.loadNextRoom(evt, id)}>
+                                    {name}
+                                </button>&nbsp;
+                                <span className="label label-success">{this.reverseDirection(room.direction)}</span>
 
                             </li>
                         })}
