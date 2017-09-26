@@ -39,6 +39,13 @@ namespace PathfinderTools.Data
                     Name = "Main Room B",
                     Description = "Foul ones rest here welcome to my dwelling West. Tell us the tale Old ones Now! good hunting. Abominable ones Bearded ones Autumnal Equinox dispel magic. Silver elf Hide Where East. Luskan Icy Beach South wall of stone December. A star shall shine on the hour of our meeting i will follow you to death and beyond Gnome what happened? Your beauty shines bright Drow When indicating respect feeblemind kill it him."
                 };
+
+                var hidden = new Room
+                {
+                    Name = " Treasure Cave",
+                    Description = " the players find the following.....",
+
+                };
                 var cRoom = new Room
                 {
                     Name = "Main Room C",
@@ -55,7 +62,7 @@ namespace PathfinderTools.Data
                 {
                     FromRoom = aRoom,
                     ToRoom = bRoom,
-                    Direction = Direction.NORTH
+                    Direction = Direction.EAST
                 };
 
                 var bc = new RoomConnector
@@ -64,7 +71,16 @@ namespace PathfinderTools.Data
                     ToRoom = cRoom,
                     Direction = Direction.SOUTH
                 };
-                
+
+                var bToTreasure = new RoomConnector
+                {
+                    FromRoom = bRoom,
+                    Direction = Direction.ABOVE,
+                    IsHidden = true,
+                    DcToFind = 15
+                };
+
+                context.RoomConnector.Add(bToTreasure);
                 context.RoomConnector.Add(ab);
                 context.RoomConnector.Add(bc);
 
