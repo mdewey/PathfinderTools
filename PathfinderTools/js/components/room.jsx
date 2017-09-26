@@ -1,4 +1,6 @@
 ﻿import React from 'react';
+import { Link } from 'react-router-dom';
+
 
 class SelectedRoom extends React.Component {
 
@@ -9,14 +11,22 @@ class SelectedRoom extends React.Component {
 
         };
 
-        //   this.handleClick = this.handleClick.bind(this);
+        this.loadNextRoom = this.loadNextRoom.bind(this);
     };
 
     //handleClick() {
     //}
 
-    loadCurrentRoom() {
-
+    loadNextRoom(evt, newId) {
+        console.log("loading ", newId)
+        fetch('/api/rooms/' + newId).then(resp => resp.json()).then(json => {
+            console.log("loaded next room", json)
+            this.setState((p, n) => {
+                return {
+                    currentRoom: json
+                }
+            })
+        })
     }
 
     componentWillReceiveProps(nextProps) {
@@ -47,8 +57,12 @@ class SelectedRoom extends React.Component {
                     <h3>Connected Rooms</h3>
                     <ul>
                         {this.state.currentRoom.allRooms.map((room, i) => {
+                            const name = room.toRoom ? room.toRoom.name : room.fromRoom.name;
+                            const id = room.toRoom ? room.toRoom.id : room.fromRoom.id;
                             return <li key={i}>
-                                {room.toRoom.name}
+                                <button className="btn btn-primary" onClick={evt => this.loadNextRoom(evt, id)}>
+                                    {name}
+                                </button>
                             </li>
                         })}
                     </ul>
