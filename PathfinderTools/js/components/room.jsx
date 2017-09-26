@@ -10,37 +10,41 @@ class SelectedRoom extends React.Component {
         this.state = {
 
         };
-
-        this.loadNextRoom = this.loadNextRoom.bind(this);
     };
 
-    //handleClick() {
-    //}
-
-    loadNextRoom(evt, newId) {
-        console.log("loading ", newId)
-        fetch('/api/rooms/' + newId).then(resp => resp.json()).then(json => {
-            console.log("loaded next room", json)
-            this.setState((p, n) => {
-                return {
-                    currentRoom: json
-                }
-            })
-        })
-    }
+    loadRoom(id) {
+        if (id) {
+            fetch("/api/rooms/" + id)
+                .then((response) => {
+                    return response.json()
+                })
+                .then((json) => {
+                    console.log("json 1", json)
+                    this.setState((prevState, props) => {
+                        console.log("updating statue")
+                        return {
+                            currentRoom: json,
+                        }
+                    });
+                });
+        } else {
+            console.log("no id to load")
+        }
+    };
 
     componentWillReceiveProps(nextProps) {
-        console.log("receinv props", nextProps.selectedRoom);
-        this.setState((prev, nextS) => {
-            return {
-                currentRoom: nextProps.selectedRoom
-            }
-        })
+        console.log(['room', 'props', nextProps, this.props, this.state])
+        this.loadRoom(nextProps.selectedRoom.id);
     }
 
     componentDidMount() {
-        //  this.loadCurrentRoom();
-        console.log("mounting", this.state)
+        console.log("mounting", this.props)
+        this.loadRoom(this.props.selectedRoom.id);
+        this.setState((prev, nextS) => {
+            return {
+                dungeon: this.props.dungeon
+            }
+        })
     };
 
 
@@ -66,6 +70,8 @@ class SelectedRoom extends React.Component {
     }
 
     render() {
+
+        console.log(['room', 'render', this.state])
         if (this.state.currentRoom) {
             return <section className="room-container">
                 <section className="right">
@@ -75,9 +81,7 @@ class SelectedRoom extends React.Component {
                             const name = room.fromRoom.name;
                             const id = room.fromRoom.id;
                             return <li key={i} className="half-space">
-                                <button className={"btn " + (room.isHidden ? "btn-warning" : "btn-primary")} onClick={evt => this.loadNextRoom(evt, id)}>
-                                    {name}
-                                </button>
+                                <Link to={{ pathname: `/dungeon/${this.state.dungeon.id}/room/${id}`, state: { selectedDungeon: this.state.dungeon } }} className={"btn " + (room.isHidden ? "btn-warning" : "btn-primary")}>{name}</Link>
                                 <span className="half-space label label-success">{room.direction}</span>
                                 <span className={"half-space label label-warning " + (room.isHidden ? "" : "hidden")}>{room.dcToFind}</span>
                             </li>
@@ -98,13 +102,11 @@ class SelectedRoom extends React.Component {
                             const name = room.toRoom.name;
                             const id = room.toRoom.id;
                             return <li key={i} className="half-space">
-                                <button className={"btn " + (room.isHidden ? "btn-warning" : "btn-primary")} onClick={evt => this.loadNextRoom(evt, id)}>
-                                    {name}
-                                </button>
+                                <Link to={{ pathname: `/dungeon/${this.state.dungeon.id}/room/${id}`, state: { selectedDungeon: this.state.dungeon } }} className={"btn " + (room.isHidden ? "btn-warning" : "btn-primary")}>{name}</Link>
                                 <span className="half-space label label-success">{room.direction}</span>
                                 <span className={"half-space label label-warning " + (room.isHidden ? "" : "hidden")}>{room.dcToFind}</span>
                             </li>
-                            
+
                         })}
                     </ul>
                 </section>

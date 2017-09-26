@@ -17,7 +17,7 @@ class App extends React.Component {
         return <main>
             <Switch>
                 <Route exact path='/' component={Dungeons} />
-                <Route exact path='/dungeon/:id' component={SelectedDungeon} />
+                <Route exact path='/dungeon/:id/room/:roomId' component={SelectedDungeon} />
             </Switch>
         </main>
     }

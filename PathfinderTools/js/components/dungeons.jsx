@@ -21,12 +21,9 @@ class Dungeons extends React.Component {
         // onload
         fetch("/api/dungeons")
             .then((response) => {
-                console.log("repsonse", response)
                 return response.json()
             })
             .then((json) => {
-                console.log("json", json)
-
                 this.setState((prevState, props) => {
                     return {
                         dungeons: json,
@@ -53,7 +50,7 @@ class Dungeons extends React.Component {
                             <div className="caption">
                                 <h3>{dun.name}</h3>
                                 <p>
-                                    <Link to={{pathname:`/dungeon/${dun.id}`, state: { selectedDungeon:dun }}} className="btn btn-primary">Start</Link>
+                                    <Link to={{pathname:`/dungeon/${dun.id}/room/${dun.startingRoomId}`, state: { selectedDungeon:dun }}} className="btn btn-primary">Start</Link>
                                 </p>
                             </div>
                         </div>
