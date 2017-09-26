@@ -75,7 +75,7 @@ namespace PathfinderTools
 
             using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
             {
-              // serviceScope.ServiceProvider.GetService<ApplicationDbContext>().EnsureSeeded();
+               serviceScope.ServiceProvider.GetService<ApplicationDbContext>().EnsureSeeded();
             }
         }
     }

@@ -87,6 +87,20 @@ namespace PathfinderTools.Data
 
                 context.SaveChanges();
 
+                var fireTrap = new Traps
+                {
+                    DcToBeat = 10,
+                    Description = "Land Mine of fireball",
+                    PerceptionDcToSpot = 20,
+                    RoomId = bRoom.Id,
+                    SaveType = SaveType.REFLEX,
+                    Trigger = "When they step on the rug"
+                };
+
+                context.Traps.Add(fireTrap);
+                context.SaveChanges();
+                
+
                 var firstDun = new Dungeon
                 {
                     Name = "First!!!",

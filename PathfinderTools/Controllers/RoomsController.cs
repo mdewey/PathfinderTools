@@ -42,6 +42,7 @@ namespace PathfinderTools.Controllers
                         .ThenInclude(i => i.FromRoom)
                     .Include(i => i.GoesToo)
                         .ThenInclude(i => i.ToRoom)
+                    .Include(i => i.Traps)
                     .SingleOrDefaultAsync(m => m.Id == id);
 
             if (room == null)
