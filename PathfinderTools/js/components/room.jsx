@@ -82,7 +82,7 @@ class SelectedRoom extends React.Component {
                             const id = room.fromRoom.id;
                             return <li key={i} className="half-space">
                                 <Link to={{ pathname: `/dungeon/${this.state.dungeon.id}/room/${id}`, state: { selectedDungeon: this.state.dungeon } }} className={"btn " + (room.isHidden ? "btn-warning" : "btn-primary")}>{name}</Link>
-                                <span className="half-space label label-success">{room.direction}</span>
+                                <span className="half-space label label-success">{this.reverseDirection(room.direction)}</span>
                                 <span className={"half-space label label-warning " + (room.isHidden ? "" : "hidden")}>{room.dcToFind}</span>
                             </li>
 
