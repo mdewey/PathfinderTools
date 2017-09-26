@@ -5,6 +5,10 @@
     <UserSecretsId>aspnet-PathfinderTools-6ED04176-F7D0-4C32-B624-C284213AB4CA</UserSecretsId>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Content Include="sass\site.sass" />
+  </ItemGroup>
+
 
   <ItemGroup>
     <PackageReference Include="BuildBundlerMinifier" Version="2.5.357" />
@@ -26,6 +30,7 @@
 
   <ItemGroup>
     <Folder Include="Data\Migrations\" />
+    <Folder Include="wwwroot\css\" />
   </ItemGroup>
 
 </Project>

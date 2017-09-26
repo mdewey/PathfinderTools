@@ -36,21 +36,33 @@
 
 
 /* Custom CSS starts here*/
-
+// "parent classes"
 .flex {
     display: flex;
 }
 
 
 .flex-container-row {
+    @extend .flex;
     flex-direction: row;
 }
 
 .flex-container-column {
+    @extend .flex;
+    flex-direction:column;
 }
 
+
+//specific classes
+.room-container{
+    @extend .flex;
+}
+
+
 .left {
+    @extend .flex-container-column;
 }
 
 .right {
+    @extend .flex-container-column;
 }
