@@ -1,6 +1,6 @@
 ﻿import React from 'react';
 import { Link } from 'react-router-dom';
-import RoomList from './navigationList'
+
 
 class SelectedRoom extends React.Component {
 
@@ -46,7 +46,6 @@ class SelectedRoom extends React.Component {
             }
         })
     };
-
 
     reverseDirection(direction) {
         if (direction === 'NORTH') {
