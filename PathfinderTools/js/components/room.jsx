@@ -45,8 +45,7 @@ class SelectedRoom extends React.Component {
 
 
     reverseDirection(direction) {
-        if (direction === 'NORTH')
-        {
+        if (direction === 'NORTH') {
             return "SOUTH";
         }
         if (direction === 'SOUTH') {
@@ -65,7 +64,7 @@ class SelectedRoom extends React.Component {
             return "ABOVE";
         }
     }
-    
+
     render() {
         if (this.state.currentRoom) {
             return <section className="room-container">
@@ -75,13 +74,14 @@ class SelectedRoom extends React.Component {
                         {this.state.currentRoom.comesFrom.map((room, i) => {
                             const name = room.fromRoom.name;
                             const id = room.fromRoom.id;
-                            return <li key={i}>
-                                <button className="btn btn-primary" onClick={evt => this.loadNextRoom(evt, id)}>
+                            return <li key={i} className="half-space">
+                                <button className={"btn " + (room.isHidden ? "btn-warning" : "btn-primary")} onClick={evt => this.loadNextRoom(evt, id)}>
                                     {name}
-                                </button>&nbsp;
-                                <span className="label label-success">{this.reverseDirection(room.direction)}</span>
-
+                                </button>
+                                <span className="half-space label label-success">{room.direction}</span>
+                                <span className={"half-space label label-warning " + (room.isHidden ? "" : "hidden")}>{room.dcToFind}</span>
                             </li>
+
                         })}
                     </ul>
                 </section>
@@ -95,26 +95,21 @@ class SelectedRoom extends React.Component {
                     <h3>"Next" Rooms</h3>
                     <ul>
                         {this.state.currentRoom.goesToo.map((room, i) => {
-                            if (room.toRoom) {
-
-                                const name = room.toRoom.name;
-                                const id = room.toRoom.id;
-                                return <li key={i}>
-                                    <button className="btn btn-primary" onClick={evt => this.loadNextRoom(evt, id)}>
-                                        {name}
-                                    </button>&nbsp;
-                                <span className="label label-success">{room.direction}</span>
-
-                                </li>
-                            } else {
-                                console.log(room)
-                                return <li key={i}>nope</li>
-                            }
+                            const name = room.toRoom.name;
+                            const id = room.toRoom.id;
+                            return <li key={i} className="half-space">
+                                <button className={"btn " + (room.isHidden ? "btn-warning" : "btn-primary")} onClick={evt => this.loadNextRoom(evt, id)}>
+                                    {name}
+                                </button>
+                                <span className="half-space label label-success">{room.direction}</span>
+                                <span className={"half-space label label-warning " + (room.isHidden ? "" : "hidden")}>{room.dcToFind}</span>
+                            </li>
+                            
                         })}
                     </ul>
                 </section>
 
-               
+
             </section>
         }
         else {

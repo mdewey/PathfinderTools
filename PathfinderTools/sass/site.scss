@@ -56,6 +56,14 @@
     margin:1em;
 }
 
+.half-space{
+    margin:0.5em;
+}
+
+.room-column {
+    max-width: 15em;
+}
+
 //specific classes
 .room-container{
     @extend .flex;
@@ -71,4 +79,5 @@
 .right {
     @extend .flex-container-column;
     @extend .space;
+    @extend .room-column;
 }
