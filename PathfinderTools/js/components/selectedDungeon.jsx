@@ -14,7 +14,7 @@ class SelectedDungeon extends React.Component {
         this.state = {
             selectedDungeon: _data,
             needToLoadDungeon: !full,
-            currentRoom: { id: roomId }
+            currentRoom: { id: roomId, traps: [], creatures: [] }
         };
     };
 
@@ -74,7 +74,12 @@ class SelectedDungeon extends React.Component {
         }
         else {
             return <section>
-                <header>Lets go through the dungeon: {this.state.selectedDungeon.name}</header>
+                <header className="row">
+                    <div className="col-md-3"> <h3><i className="glyphicon glyphicon-tower right-bump" />{this.state.selectedDungeon.name}</h3></div>
+                    <div className="col-md-3"></div>
+                </header>
+                <hr />
+
                 <Room selectedRoom={this.state.currentRoom} dungeon={this.state.selectedDungeon} />
             </section>
         }

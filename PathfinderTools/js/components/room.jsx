@@ -73,8 +73,8 @@ class SelectedRoom extends React.Component {
         console.log(['room', 'render', this.state])
         if (this.state.currentRoom) {
             return <section className="room-container">
-                <section className="right">
-                    <h3>"Prev" Rooms</h3>
+                <section className="right col-md-2">
+                    <h4>"Prev" Rooms</h4>
                     <ul>
                         {this.state.currentRoom.comesFrom.map((room, i) => {
                             const name = room.fromRoom.name;
@@ -88,14 +88,35 @@ class SelectedRoom extends React.Component {
                         })}
                     </ul>
                 </section>
-                <section className="left">
-                    <header>currently in {this.state.currentRoom.name}</header>
+                <section className="left col-md-8">
+                    <header className="row">
+                        <div className="col-md-6"><h4><i className="glyphicon glyphicon-map-marker right-bump" /><strong>{this.state.currentRoom.name}</strong></h4></div>
+                        <div className="col-md-2 col-md-offset-1"> <h4>Traps: {this.state.currentRoom.traps.length}</h4></div>
+                        <div className="col-md-3"> <h4>Creatures: {this.state.currentRoom.creatures.length}</h4></div>
+                    </header>
                     <section>
                         {this.state.currentRoom.description}
                     </section>
+                    <section>
+
+                        {this.state.currentRoom.traps.map((trap, i) => {
+                            return <div className="panel panel-default" key={i}>
+                                <div className="panel-body">
+                                    {trap.description}
+                                </div>
+                            </div>
+                        })}
+                        {this.state.currentRoom.creatures.map((creature, i) => {
+                            return <div className="panel panel-default" key={i}>
+                                <div className="panel-body">
+                                    {creature.name}
+                                </div>
+                            </div>
+                        })}
+                    </section>
                 </section>
-                <section className="right">
-                    <h3>"Next" Rooms</h3>
+                <section className="right col-md-2">
+                    <h4>"Next" Rooms</h4>
                     <ul>
                         {this.state.currentRoom.goesToo.map((room, i) => {
                             const name = room.toRoom.name;
