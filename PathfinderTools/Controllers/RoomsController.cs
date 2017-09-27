@@ -43,6 +43,7 @@ namespace PathfinderTools.Controllers
                     .Include(i => i.GoesToo)
                         .ThenInclude(i => i.ToRoom)
                     .Include(i => i.Traps)
+                    .Include(i => i.Creatures)
                     .SingleOrDefaultAsync(m => m.Id == id);
 
             if (room == null)
