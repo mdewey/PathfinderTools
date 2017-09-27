@@ -17,7 +17,7 @@ namespace PathfinderTools.Models
 
 
         public ICollection<Traps> Traps { get; set; } = new HashSet<Traps>();
-
+        public ICollection<Creature> Creatures { get; set; } = new HashSet<Creature>();
 
         [DisplayName("PreviousRooms")]
         [InverseProperty(nameof(RoomConnector.ToRoom))]

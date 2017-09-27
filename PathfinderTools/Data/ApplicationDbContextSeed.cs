@@ -99,7 +99,45 @@ namespace PathfinderTools.Data
 
                 context.Traps.Add(fireTrap);
                 context.SaveChanges();
-                
+
+                var saruna = new Creature
+                {
+                    D20PfsrdUrl = "http://www.d20pfsrd.com/bestiary/monster-listings/undead/mummified-gynosphinx/",
+                    ChallengeRating = 9,
+                    HitPoints = 114,
+                    Morale = @"Saruna flees if reduced to 30
+                                or fewer hit points, using her wand of
+                                dimension door to travel to area A7.
+                                Without the blessing of a true Jeweled
+                                Sage, she cannot travel outside of this
+                                wing of the sanctum, and she fights until
+                                destroyed if cornered.",
+                    Weaknesses = "vulnerable to acid",
+                    Tatics = @"Before Combat Saruna used the wand
+                                of displacement during the fight with
+                                the mummies.The spell has 2 rounds
+                                remaining before it ends.
+                                During Combat Saruna pounces,
+                                                    hoping to flank with any of her allies.
+                                Her desiccated paws are just dexterous
+                                enough to allow her to activate a wand,
+                                                    and she refreshes her displacement spell
+                                when possible.
+                                Morale Saruna fle",
+                    Name = "Saruna",
+                    RoomId = cRoom.Id,
+                    Statistics = @"Languages Ancient Osiriani, Draconic, Sphinx; comprehend
+                                    languages
+                                    Combat Gear wand of dimension door (5 charges), wand of
+                                    displacement (10 charges); Other Gear pendant of vast
+                                    intelligence +2 (Use Magic Device)"
+
+
+
+                };
+
+                context.Creatures.Add(saruna);
+                context.SaveChanges();
 
                 var firstDun = new Dungeon
                 {
