@@ -10,6 +10,5 @@ namespace PathfinderTools.Models
         FORT,
         REFLEX,
         WILL
-
     }
 }
