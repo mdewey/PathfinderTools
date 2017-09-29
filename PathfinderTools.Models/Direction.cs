@@ -5,7 +5,6 @@ using System.ComponentModel;
 namespace PathfinderTools.Models
 {
     [DefaultValue(NONE)]
-    [JsonConverter(typeof(StringEnumConverter))]
     public enum Direction
     {
         NONE =0,

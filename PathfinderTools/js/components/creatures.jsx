@@ -23,9 +23,18 @@ class Creatures extends React.Component {
     render() {
 
         console.log(['creatures', 'render', this.state])
+        
         return <div className="col-md-6">
             {this.state.creatures.map((creature, i) => {
-                return <div className="panel panel-warning" key={i}>
+                let _color = "default";
+                if (creature.attitude > 0)
+                {
+                    _color = "success"
+                } else if (creature.attitude < 0)
+                {
+                    _color = "danger"
+                }
+                return <div className={"panel panel-"+_color} key={i}>
                     <div className="panel-heading">
                         <h3 className="panel-title"><a href={creature.d20PfsrdUrl}>{creature.name}</a> CR {creature.challengeRating}</h3>
                     </div>
