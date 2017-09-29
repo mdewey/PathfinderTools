@@ -9,13 +9,7 @@ class Dungeons extends React.Component {
         super();
         this.state = {
         };
-        //   this.handleClick = this.handleClick.bind(this);
     };
-
-    //handleClick() {
-    //}
-
-
 
     componentDidMount() {
         // onload
@@ -44,18 +38,27 @@ class Dungeons extends React.Component {
         else {
             return <div className="row">
                 {this.state.dungeons.map((dun, i) => {
-                    return <div className="col-sm-6 col-md-4" key={i}>
+                    return <div className="col-sm-6 col-md-3" key={i}>
+                        <Link to={{ pathname: `/dungeon/${dun.id}/room/${dun.startingRoomId}`, state: { selectedDungeon: dun } }} className="btn btn-dungeon">
+                            <div className="thumbnail">
+                                <img src="http://fillmurray.com/242/200" alt="..." />
+                                <div className="caption">
+                                    <h3><i className="glyphicon glyphicon-tower right-bump" />{dun.name}</h3>
+                                </div>
+                            </div>
+                        </Link>
+                    </div>
+                })}
+                <div className="col-sm-6 col-md-3">
+                    <Link to={{ pathname: `/dungeon/create` }} className="btn btn-dungeon">
                         <div className="thumbnail">
                             <img src="http://fillmurray.com/242/200" alt="..." />
                             <div className="caption">
-                                <h3>{dun.name}</h3>
-                                <p>
-                                    <Link to={{pathname:`/dungeon/${dun.id}/room/${dun.startingRoomId}`, state: { selectedDungeon:dun }}} className="btn btn-primary">Start</Link>
-                                </p>
+                                <h3><i className="glyphicon glyphicon-plus-sign right-bump" />Create New</h3>
                             </div>
                         </div>
-                    </div>
-                })}
+                    </Link>
+                </div>
             </div>
         }
     } // end of render

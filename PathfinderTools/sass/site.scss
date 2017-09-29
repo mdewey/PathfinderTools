@@ -127,3 +127,33 @@
     @extend .italics-text;
     @extend .bold-text;
 }
+
+
+.btn-dungeon {
+    background-color: #c7cdc0;
+    border-color: #c7cdc0;
+}
+
+.btn-dungeon:hover,
+.btn-dungeon:focus,
+.btn-dungeon:active,
+.btn-dungeon.active {
+    background-color: #bac2b2;
+    border-color: #aeb6a4;
+}
+
+.btn-dungeon.disabled:hover,
+.btn-dungeon.disabled:focus,
+.btn-dungeon.disabled:active,
+.btn-dungeon.disabled.active,
+.btn-dungeon[disabled]:hover,
+.btn-dungeon[disabled]:focus,
+.btn-dungeon[disabled]:active,
+.btn-dungeon[disabled].active,
+fieldset[disabled] .btn-dungeon:hover,
+fieldset[disabled] .btn-dungeon:focus,
+fieldset[disabled] .btn-dungeon:active,
+fieldset[disabled] .btn-dungeon.active {
+    background-color: #c7cdc0;
+    border-color: #c7cdc0;
+}
