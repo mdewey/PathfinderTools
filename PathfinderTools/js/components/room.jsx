@@ -1,7 +1,7 @@
 ﻿import React from 'react';
 import { Link } from 'react-router-dom';
 import NavigationList from './navigationList'
-
+import Traps from './trap'
 
 
 //THought I shouldnt have any ajax calls in here
@@ -66,15 +66,8 @@ class SelectedRoom extends React.Component {
                     <section>
                         {this.state.currentRoom.description}
                     </section>
-                    <section>
-
-                        {this.state.currentRoom.traps.map((trap, i) => {
-                            return <div className="panel panel-default" key={i}>
-                                <div className="panel-body">
-                                    {trap.description}
-                                </div>
-                            </div>
-                        })}
+                    <section className="row space">
+                        <Traps traps={this.state.currentRoom.traps}/>
                         {this.state.currentRoom.creatures.map((creature, i) => {
                             return <div className="panel panel-default" key={i}>
                                 <div className="panel-body">

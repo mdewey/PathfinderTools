@@ -90,6 +90,7 @@ namespace PathfinderTools.Data
                 var fireTrap = new Traps
                 {
                     DcToBeat = 10,
+                    Name ="Fire ball trap",
                     Description = "Land Mine of fireball",
                     PerceptionDcToSpot = 20,
                     RoomId = bRoom.Id,
