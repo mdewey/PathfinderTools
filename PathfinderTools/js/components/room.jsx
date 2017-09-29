@@ -2,7 +2,7 @@
 import { Link } from 'react-router-dom';
 import NavigationList from './navigationList'
 import Traps from './trap'
-
+import Creatures from './creatures'
 
 //THought I shouldnt have any ajax calls in here
 class SelectedRoom extends React.Component {
@@ -24,33 +24,7 @@ class SelectedRoom extends React.Component {
             }
         })
     }
-
-    componentDidMount() {
-        console.log(["room","mounting", this.props, this.state])
-      
-    };
-
-    reverseDirection(direction) {
-        if (direction === 'NORTH') {
-            return "SOUTH";
-        }
-        if (direction === 'SOUTH') {
-            return "NORTH";
-        }
-        if (direction === 'EAST') {
-            return "WEST";
-        }
-        if (direction === 'WEST') {
-            return "EAST";
-        }
-        if (direction === 'ABOVE') {
-            return "BELOW";
-        }
-        if (direction === 'BELOW') {
-            return "ABOVE";
-        }
-    }
-
+    
     render() {
 
         console.log(['room', 'render', this.state])
@@ -67,14 +41,10 @@ class SelectedRoom extends React.Component {
                         {this.state.currentRoom.description}
                     </section>
                     <section className="row space">
-                        <Traps traps={this.state.currentRoom.traps}/>
-                        {this.state.currentRoom.creatures.map((creature, i) => {
-                            return <div className="panel panel-default" key={i}>
-                                <div className="panel-body">
-                                    {creature.name}
-                                </div>
-                            </div>
-                        })}
+                        <Traps traps={this.state.currentRoom.traps} />
+                        <Creatures creatures={this.state.currentRoom.creatures} />
+
+                       
                     </section>
                 </section>
                 <NavigationList title='Next Room' dungeon={this.state.dungeon} isFlipped={false} rooms={this.state.currentRoom.goesToo} />

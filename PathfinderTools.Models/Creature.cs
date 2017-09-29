@@ -16,6 +16,7 @@ namespace PathfinderTools.Models
         public string D20PfsrdUrl { get; set; }
         public string Weaknesses { get; set; }
         public string Statistics { get; set; }
+        
 
         public int RoomId { get; set; }
         public Room Room { get; set; }
