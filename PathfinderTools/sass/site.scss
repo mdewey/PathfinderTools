@@ -49,28 +49,45 @@
 
 .flex-container-column {
     @extend .flex;
-    flex-direction:column;
+    flex-direction: column;
 }
 
-.space{
-    margin:1em;
+.space {
+    margin: 1em;
 }
 
-.half-space{
-    margin:0.5em;
+.half-space {
+    margin: 0.5em;
 }
 
 .room-column {
     max-width: 15em;
 }
 
-.right-bump
-{
-    margin-right:1em;
+.right-bump {
+    margin-right: 1em;
 }
 
-.left-bump{
-    margin-left:1em;
+.left-bump {
+    margin-left: 1em;
+}
+
+.top-bump {
+    margin-top: 1em;
+}
+
+.bold-text {
+    font-weight: bold
+}
+
+ .italics-text{
+     font-style:italic;
+ }
+
+
+.reset {
+    margin: 0;
+    padding: 0;
 }
 //specific classes
 
@@ -89,4 +106,24 @@
     @extend .flex-container-column;
     @extend .space;
     @extend .room-column;
+}
+
+.sub-section-header {
+    @extend .bold-text;
+    @extend .reset;
+}
+
+.sub-section-content {
+
+    @extend .space;
+}
+
+.encounters {
+    @extend .top-bump;
+}
+
+
+.sub-header {
+    @extend .italics-text;
+    @extend .bold-text;
 }

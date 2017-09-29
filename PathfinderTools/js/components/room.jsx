@@ -40,7 +40,7 @@ class SelectedRoom extends React.Component {
                     <section>
                         {this.state.currentRoom.description}
                     </section>
-                    <section className="row space">
+                    <section className="row encounters">
                         <Traps traps={this.state.currentRoom.traps} />
                         <Creatures creatures={this.state.currentRoom.creatures} />
 

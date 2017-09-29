@@ -106,7 +106,7 @@ namespace PathfinderTools.Data
                     D20PfsrdUrl = "http://www.d20pfsrd.com/bestiary/monster-listings/undead/mummified-gynosphinx/",
                     ChallengeRating = 9,
                     HitPoints = 114,
-                    Attitude = Attitude.UNFRIENDLY,
+                    FriendlinessValue = Attitude.UNFRIENDLY,
                     Morale = @"Saruna flees if reduced to 30
                                 or fewer hit points, using her wand of
                                 dimension door to travel to area A7.
