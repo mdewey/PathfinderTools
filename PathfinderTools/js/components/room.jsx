@@ -1,50 +1,30 @@
 ﻿import React from 'react';
 import { Link } from 'react-router-dom';
 
-
+//THought I shouldnt have any ajax calls in here
 class SelectedRoom extends React.Component {
 
     constructor(props) {
         super(props);
-        console.log("room props", props);
+        console.log(["room","ctor",props]);
         this.state = {
 
         };
     };
 
-    loadRoom(id) {
-        if (id) {
-            fetch("/api/rooms/" + id)
-                .then((response) => {
-                    return response.json()
-                })
-                .then((json) => {
-                    console.log("json 1", json)
-                    this.setState((prevState, props) => {
-                        console.log("updating statue")
-                        return {
-                            currentRoom: json,
-                        }
-                    });
-                });
-        } else {
-            console.log("no id to load")
-        }
-    };
-
     componentWillReceiveProps(nextProps) {
         console.log(['room', 'props', nextProps, this.props, this.state])
-        this.loadRoom(nextProps.selectedRoom.id);
+        this.setState((p, n) => {
+            return {
+                currentRoom: nextProps.selectedRoom,
+                dungeon: nextProps.dungeon
+            }
+        })
     }
 
     componentDidMount() {
-        console.log("mounting", this.props)
-        this.loadRoom(this.props.selectedRoom.id);
-        this.setState((prev, nextS) => {
-            return {
-                dungeon: this.props.dungeon
-            }
-        })
+        console.log(["room","mounting", this.props, this.state])
+      
     };
 
     reverseDirection(direction) {

@@ -23,6 +23,8 @@ class SelectedDungeon extends React.Component {
         console.log(['selectedDungoen', 'mount', this.state])
         if (this.state.needToLoadDungeon) {
             this.loadDungeon()
+        } else {
+            this.loadNextRoom(this.state.currentRoom.id)
         }
     };
 
@@ -36,7 +38,6 @@ class SelectedDungeon extends React.Component {
                 .then((json) => {
                     console.log(['selectedDungoen', "fetched next room", json])
                     this.setState((prevState, props) => {
-                        console.log("updating statue")
                         return {
                             currentRoom: json,
                         }
@@ -60,6 +61,7 @@ class SelectedDungeon extends React.Component {
                 });
             });
     }
+
     componentWillReceiveProps(nextProps) {
         console.log(['selectedDungoen', 'props', nextProps, this.props, this.state])
         this.loadNextRoom(nextProps.match.params.roomId)
