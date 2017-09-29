@@ -55,7 +55,7 @@ class NavigationList extends React.Component {
         console.log(['nav', 'render', this.state])
         if (this.state.rooms) {
             return <section className="right col-md-2">
-                <h4>Prev Room</h4>
+                <h4>{this.state.title}</h4>
                 <ul>
                     {this.state.rooms.map((room, i) => {
                         const name = room.toRoom ? room.toRoom.name : room.fromRoom.name;
