@@ -1,5 +1,8 @@
 ﻿import React from 'react';
 import { Link } from 'react-router-dom';
+import NavigationList from './navigationList'
+
+
 
 //THought I shouldnt have any ajax calls in here
 class SelectedRoom extends React.Component {
@@ -53,21 +56,7 @@ class SelectedRoom extends React.Component {
         console.log(['room', 'render', this.state])
         if (this.state.currentRoom) {
             return <section className="room-container">
-                <section className="right col-md-2">
-                    <h4>"Prev" Rooms</h4>
-                    <ul>
-                        {this.state.currentRoom.comesFrom.map((room, i) => {
-                            const name = room.fromRoom.name;
-                            const id = room.fromRoom.id;
-                            return <li key={i} className="half-space">
-                                <Link to={{ pathname: `/dungeon/${this.state.dungeon.id}/room/${id}`, state: { selectedDungeon: this.state.dungeon } }} className={"btn " + (room.isHidden ? "btn-warning" : "btn-primary")}>{name}</Link>
-                                <span className="half-space label label-success">{this.reverseDirection(room.direction)}</span>
-                                <span className={"half-space label label-warning " + (room.isHidden ? "" : "hidden")}>{room.dcToFind}</span>
-                            </li>
-
-                        })}
-                    </ul>
-                </section>
+                <NavigationList title='Prev Room' dungeon={this.state.dungeon} isFlipped = { true} rooms={this.state.currentRoom.comesFrom} />
                 <section className="left col-md-8">
                     <header className="row">
                         <div className="col-md-6"><h4><i className="glyphicon glyphicon-map-marker right-bump" /><strong>{this.state.currentRoom.name}</strong></h4></div>
@@ -95,23 +84,7 @@ class SelectedRoom extends React.Component {
                         })}
                     </section>
                 </section>
-                <section className="right col-md-2">
-                    <h4>"Next" Rooms</h4>
-                    <ul>
-                        {this.state.currentRoom.goesToo.map((room, i) => {
-                            const name = room.toRoom.name;
-                            const id = room.toRoom.id;
-                            return <li key={i} className="half-space">
-                                <Link to={{ pathname: `/dungeon/${this.state.dungeon.id}/room/${id}`, state: { selectedDungeon: this.state.dungeon } }} className={"btn " + (room.isHidden ? "btn-warning" : "btn-primary")}>{name}</Link>
-                                <span className="half-space label label-success">{room.direction}</span>
-                                <span className={"half-space label label-warning " + (room.isHidden ? "" : "hidden")}>{room.dcToFind}</span>
-                            </li>
-
-                        })}
-                    </ul>
-                </section>
-
-
+                <NavigationList title='Next Room' dungeon={this.state.dungeon} isFlipped={false} rooms={this.state.currentRoom.goesToo} />
             </section>
         }
         else {
