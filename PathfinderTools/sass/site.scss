@@ -76,6 +76,11 @@
     margin-top: 1em;
 }
 
+.bottom-bump{
+    margin-bottom:1em;
+}
+
+
 .bold-text {
     font-weight: bold
 }
@@ -128,7 +133,15 @@
     @extend .bold-text;
 }
 
+.new-name-container
+{
+    @extend .bottom-bump;
+}
 
+
+
+
+// custom button colors
 .btn-dungeon {
     background-color: #c7cdc0;
     border-color: #c7cdc0;
