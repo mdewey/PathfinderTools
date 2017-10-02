@@ -29,7 +29,7 @@ class CreateDungeon extends React.Component {
 
     createDungeon() {
         console.log(["create", "post", this.state.dungeon])
-        fetch('/api/dungeon', {
+        fetch('/api/dungeons', {
             method: "POST",
             headers: {
                 'Content-type': 'application/json'
@@ -37,7 +37,12 @@ class CreateDungeon extends React.Component {
             body: JSON.stringify({ name: this.state.dungeon.name })
         }).then(resp => resp.json())
             .then(json => {
-                consle.log('back from server', json)
+                this.setState(() => {
+                    return {
+                        dungeon: json,
+                        isNavigating:true
+                    }
+                })
             }).catch(err => {
                 console.log("oops", err)
             })
@@ -47,7 +52,8 @@ class CreateDungeon extends React.Component {
         console.log(['create', 'render', this.state])
         if (this.state.isNavigating) {
             return <Redirect to={{
-                pathname: `/dungeon/${this.state.dungeon.id}/manage`
+                pathname: `/dungeon/${this.state.dungeon.id}/manage`,
+                state: this.state
             }} push={true} />
         } else {
             return <section>

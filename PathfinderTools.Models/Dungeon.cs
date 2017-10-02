@@ -12,7 +12,7 @@ namespace PathfinderTools.Models
 
 
         //Navigation
-        public int StartingRoomId { get; set; }
+        public int? StartingRoomId { get; set; }
         public Room StartingRoom { get; set; }
     }
 }
