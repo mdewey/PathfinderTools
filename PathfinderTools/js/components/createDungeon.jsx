@@ -10,21 +10,44 @@ class CreateDungeon extends React.Component {
         console.log(["room", "ctor", props]);
         this.state = {
             isNavigating: false,
-            dungeonId: 1
+            dungeon: {}
         };
         this.createDungeon = this.createDungeon.bind(this)
     };
 
-    createDungeon() {
+    redirectToManage() {
         console.log("cllllick")
-        this.setState(() => { return { isNavigating: true }})
+        this.setState(() => { return { isNavigating: true } })
+    }
+
+    updateDungeonName(e) {
+        console.log(["create", "updating name", e.target.value])
+        this.setState({
+            dungeon: { name: e.target.value }
+        })
+    }
+
+    createDungeon() {
+        console.log(["create", "post", this.state.dungeon])
+        fetch('/api/dungeon', {
+            method: "POST",
+            headers: {
+                'Content-type': 'application/json'
+            },
+            body: JSON.stringify({ name: this.state.dungeon.name })
+        }).then(resp => resp.json())
+            .then(json => {
+                consle.log('back from server', json)
+            }).catch(err => {
+                console.log("oops", err)
+            })
     }
 
     render() {
         console.log(['create', 'render', this.state])
         if (this.state.isNavigating) {
             return <Redirect to={{
-                pathname: `/dungeon/${this.state.dungeonId}/manage`
+                pathname: `/dungeon/${this.state.dungeon.id}/manage`
             }} push={true} />
         } else {
             return <section>
@@ -33,7 +56,7 @@ class CreateDungeon extends React.Component {
                     <section className="new-name-container">
                         <div className="input-group">
                             <span className=" input-group-addon" id="basic-addon1"><i className="glyphicon glyphicon-tower" /></span>
-                            <input type="text" className="form-control" placeholder="Name the story" aria-describedby="basic-addon1" />
+                            <input onChange={evt => this.updateDungeonName(evt)} type="text" className="form-control" placeholder="Name the story" aria-describedby="basic-addon1" />
                         </div>
                     </section>
                     <p><button onClick={this.createDungeon} className="btn btn-primary btn-lg" href="#" role="button">Create</button></p>

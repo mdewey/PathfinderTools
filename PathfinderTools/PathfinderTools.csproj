@@ -33,4 +33,8 @@
     <Folder Include="wwwroot\css\" />
   </ItemGroup>
 
+  <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
+    <Exec Command="webpack" />
+  </Target>
+
 </Project>
