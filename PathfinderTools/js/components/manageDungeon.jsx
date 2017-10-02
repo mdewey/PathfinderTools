@@ -45,6 +45,8 @@ class ManageDungeon extends React.Component {
             <section>
                 <input type="text" value={this.state.dungeon.name} onChange={evt => this.updateName(evt)} />
             </section>
+            <section>
+            </section>
         </section>
     } // end of render
 } //end of class
