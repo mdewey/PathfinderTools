@@ -38,7 +38,7 @@ class Dungeons extends React.Component {
         else {
             return <div className="row">
                 {this.state.dungeons.map((dun, i) => {
-                    return <div className="col-sm-6 col-md-3" key={i}>
+                    return <div className="col-sm-6 col-md-3 space" key={i}>
                         <Link to={{ pathname: `/dungeon/${dun.id}/room/${dun.startingRoomId}`, state: { selectedDungeon: dun } }} className="btn btn-dungeon">
                             <div className="thumbnail">
                                 <img src="http://fillmurray.com/242/200" alt="..." />
@@ -49,7 +49,7 @@ class Dungeons extends React.Component {
                         </Link>
                     </div>
                 })}
-                <div className="col-sm-6 col-md-3">
+                <div className="col-sm-6 col-md-3 space">
                     <Link to={{ pathname: `/dungeon/create` }} className="btn btn-dungeon">
                         <div className="thumbnail">
                             <img src="http://fillmurray.com/242/200" alt="..." />
