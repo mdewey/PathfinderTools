@@ -25,7 +25,7 @@ namespace PathfinderTools.Controllers
         [HttpGet]
         public IEnumerable<Dungeon> GetDungeons()
         {
-             return _context.Dungeons;
+            return _context.Dungeons;
         }
 
         // GET: api/Dungeons/5
@@ -49,7 +49,7 @@ namespace PathfinderTools.Controllers
 
         // PUT: api/Dungeons/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutDungeon([FromRoute] int id, [FromBody] Dungeon dungeon)
+        public async Task<IActionResult> PutDungeon([FromRoute] int id, [FromBody][Bind("Id,Name")] Dungeon dungeon)
         {
             if (!ModelState.IsValid)
             {
@@ -60,8 +60,8 @@ namespace PathfinderTools.Controllers
             {
                 return BadRequest();
             }
-
-            _context.Entry(dungeon).State = EntityState.Modified;
+            _context.Dungeons.Attach(dungeon);
+            _context.Entry(dungeon).Property(p => p.Name).IsModified = true;
 
             try
             {
@@ -79,7 +79,7 @@ namespace PathfinderTools.Controllers
                 }
             }
 
-            return NoContent();
+            return Ok();
         }
 
         // POST: api/Dungeons

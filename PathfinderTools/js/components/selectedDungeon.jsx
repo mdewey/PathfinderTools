@@ -1,5 +1,4 @@
-﻿import React from 'react';
-import Room from './room'
+﻿import Room from './room'
 import { Link } from 'react-router-dom'
 
 
@@ -77,7 +76,22 @@ class SelectedDungeon extends React.Component {
         if (this.state.needToLoadDungeon) {
             return <div> loading dungeon....</div>
         }
-        else {
+        else if (this.state.selectedDungeon.startingRoomId) {
+            return <section>
+                <header className="row">
+                    <div className="col-md-3"> <h3><i className="glyphicon glyphicon-tower right-bump" />{this.state.selectedDungeon.name}</h3></div>
+                    <div className="col-md-3 col-md-offset-6">
+                        <h3> <Link to={{ pathname: `/dungeon/${this.state.selectedDungeon.id}/manage`, state: { dungeon: this.state.selectedDungeon } }} className="btn btn-primary">
+                            <i className="glyphicon glyphicon-pencil right-bump"></i>
+                            Manage
+                        </Link>
+                        </h3>
+                    </div>
+                </header>   
+                <hr />
+                <Room selectedRoom={this.state.currentRoom} dungeon={this.state.selectedDungeon} />
+            </section>
+        } else {
             return <section>
                 <header className="row">
                     <div className="col-md-3"> <h3><i className="glyphicon glyphicon-tower right-bump" />{this.state.selectedDungeon.name}</h3></div>
@@ -90,10 +104,10 @@ class SelectedDungeon extends React.Component {
                     </div>
                 </header>
                 <hr />
-
-                <Room selectedRoom={this.state.currentRoom} dungeon={this.state.selectedDungeon} />
+                <em>No Rooms create yet, click "manage" to add a room</em>
             </section>
         }
+
     } // end of render
 } //end of class
 
