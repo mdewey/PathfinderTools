@@ -18,6 +18,7 @@ namespace PathfinderTools.Controllers
 {
     [Authorize]
     [Route("[controller]/[action]")]
+    [ApiExplorerSettings(IgnoreApi = true)]
     public class AccountController : Controller
     {
         private readonly UserManager<ApplicationUser> _userManager;

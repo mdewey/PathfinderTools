@@ -9,6 +9,7 @@ using PathfinderTools.Data;
 
 namespace PathfinderTools.Controllers
 {
+    [ApiExplorerSettings(IgnoreApi = true)]
     public class HomeController : Controller
     {
 

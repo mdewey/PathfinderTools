@@ -11,6 +11,8 @@ using Microsoft.Extensions.DependencyInjection;
 using PathfinderTools.Data;
 using PathfinderTools.Models;
 using PathfinderTools.Services;
+using Swashbuckle.AspNetCore;
+using Swashbuckle.AspNetCore.Swagger;
 
 namespace PathfinderTools
 {
@@ -42,6 +44,11 @@ namespace PathfinderTools
                     options => options.SerializerSettings.ReferenceLoopHandling =
                     Newtonsoft.Json.ReferenceLoopHandling.Ignore
                 );
+
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new Info { Title = "My API", Version = "v1" });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -62,6 +69,14 @@ namespace PathfinderTools
 
             app.UseAuthentication();
 
+            app.UseSwagger();
+
+
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+            });
+
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
@@ -77,6 +92,7 @@ namespace PathfinderTools
             {
               serviceScope.ServiceProvider.GetService<ApplicationDbContext>().EnsureSeeded();
             }
+
         }
     }
 
