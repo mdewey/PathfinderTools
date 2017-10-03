@@ -47,6 +47,15 @@ namespace PathfinderTools.Controllers
             return Ok(dungeon);
         }
 
+
+        [HttpGet("{id}/rooms")]
+        public async Task<IActionResult> GetDungeonsRooms([FromRoute] int id)
+        {
+            var rooms = await _context.Rooms.Where(m => m.DungeonId == id).ToListAsync();
+            
+            return Ok(rooms);
+        }
+
         // PUT: api/Dungeons/5
         [HttpPut("{id}")]
         public async Task<IActionResult> PutDungeon([FromRoute] int id, [FromBody][Bind("Id,Name")] Dungeon dungeon)

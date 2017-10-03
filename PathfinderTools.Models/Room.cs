@@ -14,7 +14,8 @@ namespace PathfinderTools.Models
 
 
         // Navigations
-
+        public int DungeonId { get; set; }
+        
 
         public ICollection<Traps> Traps { get; set; } = new HashSet<Traps>();
         public ICollection<Creature> Creatures { get; set; } = new HashSet<Creature>();

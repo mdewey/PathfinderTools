@@ -8,7 +8,9 @@ class ManageDungeon extends React.Component {
         console.log(["manage", "ctor", props]);
         this.state = {
             isLoading: false,
-            dungeon: props.location.state.dungeon
+            dungeon: props.location.state.dungeon,
+            isUpdatingName: false,
+            rooms: []
         };
         this.updateName = this.updateName.bind(this)
     };
@@ -29,15 +31,28 @@ class ManageDungeon extends React.Component {
                 },
                 body: JSON.stringify({ name: this.state.dungeon.name, id: this.state.dungeon.id })
             }).then(resp => resp.json())
-                .then(json => {
-                    console.log("back", json)
-                }).catch(err => {
+                .catch(err => {
                     console.log("oops", err)
                 })
         })
 
     }
 
+    componentWillMount() {
+        console.log(['manage', 'mount', this.state])
+        fetch(`/api/dungeons/${this.state.dungeon.id}/rooms`).then(resp => resp.json())
+            .then(json => {
+                console.log("rooms, ", json)
+                this.setState(() => {
+                    return {
+                        rooms: json
+                    }
+                })
+            }).catch(err => {
+                console.log("err on rooms", err)
+            })
+
+    }
 
     render() {
         console.log(['manage', 'render', this.state])
@@ -45,7 +60,28 @@ class ManageDungeon extends React.Component {
             <section>
                 <input type="text" value={this.state.dungeon.name} onChange={evt => this.updateName(evt)} />
             </section>
+            <br />
             <section>
+                {this.state.rooms.map((room, i) => {
+                    return <div className="col-xs-3" key={i}>
+                        <div className="panel panel-default">
+                            <div className="panel-heading">{room.name}</div>
+                            <div className="panel-body">
+                                Panel content
+                            </div>
+                        </div>
+                    </div>
+                })}
+                <div className="col-xs-3">
+                    <div className="panel panel-default" >
+                        <div className="form-group">
+                            <div className="input-group">
+                                <div className="input-group-addon">Name</div>
+                                <input type="text" className="form-control" placeholder="" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </section>
         </section>
     } // end of render

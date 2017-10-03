@@ -237,9 +237,13 @@ namespace PathfinderTools.Migrations
 
                     b.Property<string>("Description");
 
+                    b.Property<int>("DungeonId");
+
                     b.Property<string>("Name");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("DungeonId");
 
                     b.ToTable("Rooms");
                 });
@@ -352,6 +356,14 @@ namespace PathfinderTools.Migrations
                     b.HasOne("PathfinderTools.Models.Room", "StartingRoom")
                         .WithMany()
                         .HasForeignKey("StartingRoomId");
+                });
+
+            modelBuilder.Entity("PathfinderTools.Models.Room", b =>
+                {
+                    b.HasOne("PathfinderTools.Models.Dungeon")
+                        .WithMany("Rooms")
+                        .HasForeignKey("DungeonId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("PathfinderTools.Models.RoomConnector", b =>

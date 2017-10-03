@@ -38,8 +38,7 @@ namespace PathfinderTools.Data
                 .OnDelete(DeleteBehavior.Restrict);
 
             });
-
-
+            
         }
     }
 }
