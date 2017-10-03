@@ -13,7 +13,42 @@ class ManageDungeon extends React.Component {
             rooms: []
         };
         this.updateName = this.updateName.bind(this)
+        this.handNewRoomName = this.handNewRoomName.bind(this)
+        this.createRoom = this.createRoom.bind(this)
     };
+
+    handNewRoomName(e) {
+        const _name = e.target.value;
+        this.setState(() => {
+            return {
+                newRoomName: _name
+            }
+        })
+    }
+
+    createRoom() {
+        fetch('/api/rooms', {
+                method: "POST",
+                headers: {
+                    'Content-type': 'application/json'
+                },
+                body: JSON.stringify({ name: this.state.newRoomName, dungeonId: this.state.dungeon.id })
+            })
+            .then(resp => resp.json())
+            .then(json => {
+                var joined = this.state.rooms.concat(json);
+                this.roomName.value =""
+                this.setState(() => {
+                    return {
+                        rooms: joined,
+                        newRoomName:""
+                    }
+                })
+    
+            }).catch(err => {
+                console.log("oops", err)
+            })
+    }
 
     updateName(e) {
         const newName = e.target.value;
@@ -74,10 +109,16 @@ class ManageDungeon extends React.Component {
                 })}
                 <div className="col-xs-3">
                     <div className="panel panel-default" >
-                        <div className="form-group">
-                            <div className="input-group">
-                                <div className="input-group-addon">Name</div>
-                                <input type="text" className="form-control" placeholder="" />
+                        <div className="panel-heading"></div>
+                        <div className="panel-body">
+                            <div className="form-group">
+                                <div className="input-group">
+                                    <div className="input-group-addon">Name</div>
+                                    <input type="text" className="form-control" placeholder="" ref={el => this.roomName = el} onChange={evt => this.handNewRoomName(evt)} />
+                                </div>
+                            </div>
+                            <div className="form-group">
+                                <button className="btn btn-primary" value={this.state.newRoomName} onClick={this.createRoom}>Create</button>
                             </div>
                         </div>
                     </div>
