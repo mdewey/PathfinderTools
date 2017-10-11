@@ -15,7 +15,26 @@ class ManageDungeon extends React.Component {
         this.updateName = this.updateName.bind(this)
         this.handNewRoomName = this.handNewRoomName.bind(this)
         this.createRoom = this.createRoom.bind(this)
+        this.setStartingRoom = this.setStartingRoom.bind(this)
     };
+
+    setStartingRoom(e, id) {
+        console.log("selected", id)
+        fetch(`/api/dungeons/${this.state.dungeon.id}/startingroom`,
+            {
+                method: "PUT",
+                headers: {
+                    'Content-type': 'application/json'
+                },
+                body: JSON.stringify({ startingRoomId: id, id: this.state.dungeon.id })
+            }
+        ).then(resp => resp.json()).then(json => {
+            console.log("back", json)
+        }).catch(err => {
+            console.log("oops", err)
+        })
+    }
+
 
     handNewRoomName(e) {
         const _name = e.target.value;
@@ -28,23 +47,23 @@ class ManageDungeon extends React.Component {
 
     createRoom() {
         fetch('/api/rooms', {
-                method: "POST",
-                headers: {
-                    'Content-type': 'application/json'
-                },
-                body: JSON.stringify({ name: this.state.newRoomName, dungeonId: this.state.dungeon.id })
-            })
+            method: "POST",
+            headers: {
+                'Content-type': 'application/json'
+            },
+            body: JSON.stringify({ name: this.state.newRoomName, dungeonId: this.state.dungeon.id })
+        })
             .then(resp => resp.json())
             .then(json => {
                 var joined = this.state.rooms.concat(json);
-                this.roomName.value =""
+                this.roomName.value = ""
                 this.setState(() => {
                     return {
                         rooms: joined,
-                        newRoomName:""
+                        newRoomName: ""
                     }
                 })
-    
+
             }).catch(err => {
                 console.log("oops", err)
             })
@@ -100,16 +119,22 @@ class ManageDungeon extends React.Component {
                 {this.state.rooms.map((room, i) => {
                     return <div className="col-xs-3" key={i}>
                         <div className="panel panel-default">
-                            <div className="panel-heading">{room.name}</div>
+                            <div className="panel-heading">
+                                <div>
+                                    {room.name}
+                                </div>
+                            </div>
                             <div className="panel-body">
-                                Panel content
+                                <div>
+                                    <button onClick={evnt => this.setStartingRoom(evnt, room.id)} className={"btn " + (this.state.dungeon.startingRoomId === room.id ? "hidden" : "btn-primary")}><i className={"glyphicon glyphicon-flag"} /> set as starting room</button>
+                                </div>
                             </div>
                         </div>
                     </div>
                 })}
                 <div className="col-xs-3">
                     <div className="panel panel-default" >
-                        <div className="panel-heading"></div>
+                        <div className="panel-heading">Create new</div>
                         <div className="panel-body">
                             <div className="form-group">
                                 <div className="input-group">

@@ -56,6 +56,7 @@ namespace PathfinderTools.Controllers
             return Ok(rooms);
         }
 
+      
         // PUT: api/Dungeons/5
         [HttpPut("{id}")]
         public async Task<IActionResult> PutDungeon([FromRoute] int id, [FromBody][Bind("Id,Name")] Dungeon dungeon)
@@ -90,6 +91,46 @@ namespace PathfinderTools.Controllers
 
             return Ok();
         }
+
+
+        [HttpPut("{id}/startingroom")]
+        public async Task<IActionResult> SetStartingRoom([FromRoute] int id, [FromBody][Bind("Id, StaringRoomId")] Dungeon dungeon)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            if (id != dungeon.Id)
+            {
+                return BadRequest();
+            }
+
+            _context.Dungeons.Attach(dungeon);
+            _context.Entry(dungeon).Property(p => p.StartingRoomId).IsModified = true;
+           
+
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!DungeonExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return Ok();
+        }
+
+
+
 
         // POST: api/Dungeons
         [HttpPost]
